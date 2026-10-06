@@ -1,0 +1,17 @@
+# The gate repository's CI (Ergon's V3 exit gate). Copied to .github/workflows/ci.yml by
+# scripts/v3-exit-gate/setup.sh. One job, on push and on pull_request (as Ergon's own CI): every
+# gate file present holds its exact line, and D's file is present only with A's, B's and C's.
+name: gate-ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  diamond:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: The diamond's files
+        run: sh scripts/check-gate.sh
